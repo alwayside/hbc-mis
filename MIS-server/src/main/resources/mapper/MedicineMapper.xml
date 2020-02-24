@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbcmis.mapper.MedicineMapper">
+
+    <resultMap id="BaseResultMap" type="com.hbcmis.entity.repository.MedicineDo">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="medicineName" jdbcType="VARCHAR" property="medicineName"/>
+        <result column="medicineProducer" jdbcType="VARCHAR" property="medicineProducer"/>
+        <result column="medicinePrice" jdbcType="INTEGER" property="medicinePrice"/>
+        <result column="medicineUnit" jdbcType="INTEGER" property="medicineUnit"/>
+        <result column="medicineDescription" jdbcType="INTEGER" property="medicineDescription"/>
+        <result column="isDelete" jdbcType="INTEGER" property="isDelete"/>
+    </resultMap>
+
+    <select id="selectById" resultType="com.hbcmis.entity.repository.MedicineDo">
+        SELECT * FROM  MIS_MEDICINE_TYPES MMT WHERE MMT.id = #{id}
+    </select>
+
+    <select id="findById" resultType="com.hbcmis.entity.repository.MedicineDo">
+        SELECT * FROM  MIS_MEDICINE_TYPES MMT WHERE MMT.id = #{id}
+        AND is_delete != 1
+    </select>
+
+    <select id="selectAll" resultType="com.hbcmis.entity.repository.MedicineDo">
+        SELECT * FROM  MIS_MEDICINE_TYPES WHERE is_delete != 1
+    </select>
+
+    <select id="selectByName" resultType="com.hbcmis.entity.repository.MedicineDo">
+        SELECT * FROM  MIS_MEDICINE_TYPES MMT WHERE MMT.medicine_name LIKE #{medicineName}
+        AND is_delete != 1
+    </select>
+
+    <select id="selectByProducer" resultType="com.hbcmis.entity.repository.MedicineDo">
+        SELECT * FROM  MIS_MEDICINE_TYPES MMT WHERE MMT.medicine_producer = #{medicineProducer}
+        AND is_delete != 1
+    </select>
+
+    <select id="selectByNameAndProducer" resultType="com.hbcmis.entity.repository.MedicineDo">
+        SELECT * FROM  MIS_MEDICINE_TYPES MMT
+        WHERE MMT.medicine_producer = #{medicineProducer}
+        AND MMT.medicine_name = #{medicineName}
+    </select>
+
+    <insert id="addMedicine" parameterType="com.hbcmis.entity.repository.MedicineDo">
+        INSERT INTO MIS_MEDICINE_TYPES VALUES (default ,#{medicineName},#{medicineProducer},#{medicinePrice},#{medicineUnit},#{medicineDescription},0)
+  	</insert>
+
+    <update id="updateMedicine" parameterType="com.hbcmis.entity.repository.MedicineDo">
+        update  MIS_MEDICINE_TYPES
+        <set>
+            <if test="medicineName!=null and medicineName!=''">
+                medicine_name = #{medicineName},
+            </if>
+            <if test="medicineProducer!=null and medicineProducer!=''">
+                medicine_producer = #{medicineProducer},
+            </if>
+            <if test="medicinePrice!=null and medicinePrice!=''">
+                medicine_price = #{medicinePrice},
+            </if>
+            <if test="medicineUnit!=null and medicineUnit!=''">
+                medicine_unit = #{medicineUnit},
+            </if>
+            <if test="medicineDescription!=null and medicineDescription!=''">
+                medicine_description = #{medicineDescription},
+            </if>
+            is_delete = 0
+        </set>
+        where id=#{id}
+    </update>
+
+    <update id="deleteMedicine" parameterType="com.hbcmis.entity.repository.MedicineDo">
+        update MIS_MEDICINE_TYPES
+        <set>
+            is_delete = 1
+        </set>
+        where id=#{id}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbcmis.mapper.SellMapper">
+
+    <resultMap id="BaseResultMap" type="com.hbcmis.entity.repository.SellDo">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sellBill" jdbcType="BIGINT" property="sellBill"/>
+        <result column="sellNumber" jdbcType="INTEGER" property="sellNumber"/>
+        <result column="sellType" jdbcType="INTEGER" property="sellType"/>
+        <result column="sellDate" jdbcType="TIMESTAMP" property="sellDate"/>
+        <result column="sellStore" jdbcType="INTEGER" property="sellStore"/>
+    </resultMap>
+
+    <resultMap id="ResultDto" type="com.hbcmis.entity.dto.SellDto">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sellBill" jdbcType="BIGINT" property="sellBill"/>
+        <result column="sellNumber" jdbcType="INTEGER" property="sellNumber"/>
+        <result column="sellType" jdbcType="INTEGER" property="sellType"/>
+        <result column="medicineName" jdbcType="VARCHAR" property="medicineName"/>
+        <result column="sellDate" jdbcType="TIMESTAMP" property="sellDate"/>
+        <result column="sellStore" jdbcType="INTEGER" property="sellStore"/>
+        <result column="storeName" jdbcType="VARCHAR" property="storeName"/>
+    </resultMap>
+
+    <select id="selectId" resultType="com.hbcmis.entity.dto.SellDto">
+        SELECT MSL.id,MSL.purchase_bill,MSL.purchase_number,MSL.purchase_type,MMT.medicine_name,MSL.purchase_store,MS.store_name,MSL.purchase_date
+        FROM (MIS_SELL MSL, MIS_MEDICINE_TYPES MMT,MIS_STORE MS)
+        WHERE MSL.id = #{id}
+        AND MSL.purchase_type = MMT.id
+        AND MSL.purchase_store = MS.id
+    </select>
+
+    <select id="selectById" resultType="com.hbcmis.entity.repository.SellDo">
+        SELECT * FROM MIS_SELL MS WHERE MS.id = #{id}
+    </select>
+
+    <select id="selectByBill" resultType="com.hbcmis.entity.repository.SellDo">
+        SELECT * FROM MIS_SELL WHERE SELL_BILL = #{sellBill}
+    </select>
+
+    <select id="selectByDate" resultType="com.hbcmis.entity.repository.SellDo">
+        SELECT * FROM MIS_SELL MS
+        WHERE MS.sell_date &lt; #{endDate}
+        AND MS.sell_date &gt; #{startDate}
+    </select>
+
+
+    <insert id="addRecord" parameterType="com.hbcmis.entity.repository.SellDo">
+        INSERT INTO MIS_SELL VALUES (default ,#{sellBill},#{sellNumber},#{sellType},default ,#{sellStore})
+  	</insert>
+
+
+    <delete id="deleteRecord" parameterType="com.hbcmis.entity.repository.SellDo">
+        DELETE FROM MIS_SELL WHERE SELL_BILL = #{sellBill}
+    </delete>
+
+</mapper>

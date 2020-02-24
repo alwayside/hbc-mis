@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbcmis.mapper.PurchaseMapper">
+
+    <resultMap id="BaseResultMap" type="com.hbcmis.entity.dto.PurchaseDto">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="purchaseBill" jdbcType="BIGINT" property="purchaseBill"/>
+        <result column="purchaseNumber" jdbcType="INTEGER" property="purchaseNumber"/>
+        <result column="purchaseType" jdbcType="INTEGER" property="purchaseType"/>
+        <result column="medicineName" jdbcType="VARCHAR" property="medicineName"/>
+        <result column="purchaseStore" jdbcType="INTEGER" property="purchaseStore"/>
+        <result column="storeName" jdbcType="VARCHAR" property="storeName"/>
+        <result column="purchaseDate" jdbcType="TIMESTAMP" property="purchaseDate"/>
+    </resultMap>
+
+    <resultMap id="BaseDoResultMap" type="com.hbcmis.entity.repository.PurchaseDo">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="purchaseBill" jdbcType="BIGINT" property="bill"/>
+        <result column="purchaseNumber" jdbcType="INTEGER" property="number"/>
+        <result column="purchaseType" jdbcType="INTEGER" property="type"/>
+        <result column="purchaseStore" jdbcType="INTEGER" property="store"/>
+        <result column="purchaseDate" jdbcType="TIMESTAMP" property="date"/>
+    </resultMap>
+
+    <!--    <select id="selectAll" resultType="com.hbcmis.entity.repository.PurchaseDo" >-->
+    <!--        SELECT * FROM MIS_ADMIN MA-->
+    <!--    </select>-->
+
+    <select id="selectId" resultType="com.hbcmis.entity.dto.PurchaseDto">
+        SELECT MP.id,MP.purchase_bill,MP.purchase_number,MP.purchase_type,MMT.medicine_name,MP.purchase_store,MS.store_name,MP.purchase_date
+        FROM (MIS_PURCHASE MP, MIS_MEDICINE_TYPES MMT,MIS_STORE MS)
+        WHERE MP.id = #{id}
+        AND MP.purchase_type = MMT.id
+        AND MP.purchase_store = MS.id
+    </select>
+
+    <select id="selectById" resultType="com.hbcmis.entity.repository.PurchaseDo">
+        SELECT * FROM MIS_PURCHASE MS WHERE MS.id = #{id}
+    </select>
+
+    <select id="selectByBill" resultType="com.hbcmis.entity.repository.PurchaseDo">
+        SELECT * FROM MIS_PURCHASE WHERE PURCHASE_BILL = #{purchaseBill}
+    </select>
+
+    <select id="selectByDate" resultType="com.hbcmis.entity.repository.PurchaseDo">
+        SELECT * FROM MIS_PURCHASE MP
+        WHERE MP.purchase_date &lt; #{endDate}
+        AND MP.purchase_date &gt; #{startDate}
+    </select>
+
+    <select id="findByDate" resultType="com.hbcmis.entity.dto.PurchaseDto">
+        SELECT MP.*,MMT.MEDICINE_NAME,MS.STORE_NAME
+        FROM (MIS_PURCHASE MP,MIS_MEDICINE_TYPES MMT,MIS_STORE MS)
+        WHERE MP.purchase_date between #{endDate} and #{startDate}
+				AND MS.id = MP.purchase_store
+				AND MMT.id = MP.purchase_type
+    </select>
+
+    <select id="selectAll" resultType="com.hbcmis.entity.dto.PurchaseDto">
+        SELECT MP.*,MMT.MEDICINE_NAME,MS.STORE_NAME
+        FROM (MIS_PURCHASE MP,MIS_MEDICINE_TYPES MMT,MIS_STORE MS)
+        WHERE MS.id = MP.purchase_store
+		AND MMT.id = MP.purchase_type
+    </select>
+
+    <insert id="addRecord" parameterType="com.hbcmis.entity.repository.PurchaseDo">
+        INSERT INTO MIS_PURCHASE VALUES (default ,#{purchaseBill},#{purchaseNumber},#{purchaseType},default ,#{purchaseStore})
+  	</insert>
+
+
+    <delete id="deleteRecord" parameterType="com.hbcmis.entity.repository.PurchaseDo">
+        DELETE FROM MIS_PURCHASE WHERE PURCHASE_BILL = #{purchaseBill}
+    </delete>
+
+
+
+</mapper>

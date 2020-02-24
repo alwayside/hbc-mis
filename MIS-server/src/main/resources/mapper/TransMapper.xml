@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbcmis.mapper.TransMapper">
+
+    <resultMap id="BaseResultMap" type="com.hbcmis.entity.repository.TransDo">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="transBill" jdbcType="BIGINT" property="transBill"/>
+        <result column="transSource" jdbcType="INTEGER" property="transStore"/>
+        <result column="transTarget" jdbcType="INTEGER" property="transStore"/>
+        <result column="transType" jdbcType="INTEGER" property="transType"/>
+        <result column="transNumber" jdbcType="INTEGER" property="transNumber"/>
+        <result column="transDate" jdbcType="TIMESTAMP" property="transDate"/>
+    </resultMap>
+
+    <resultMap id="ResultDto" type="com.hbcmis.entity.dto.TransDto">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="transBill" jdbcType="BIGINT" property="transBill"/>
+        <result column="transSource" jdbcType="INTEGER" property="transSource"/>
+        <result column="SourceName" jdbcType="INTEGER" property="SourceName"/>
+        <result column="transTarget" jdbcType="INTEGER" property="transTarget"/>
+        <result column="targetName" jdbcType="INTEGER" property="targetName"/>
+        <result column="transType" jdbcType="INTEGER" property="transType"/>
+        <result column="transNumber" jdbcType="INTEGER" property="transNumber"/>
+        <result column="medicineName" jdbcType="VARCHAR" property="medicineName"/>
+        <result column="transDate" jdbcType="TIMESTAMP" property="transDate"/>
+    </resultMap>
+
+
+    <select id="selectId" resultType="com.hbcmis.entity.dto.TransDto">
+        SELECT MT.id,MT.TANS_BILL,MT.TRANS_SOURCE,MT.TRANS_TARGET,MT.TRANS_TYPE,MT.TRANS_NUMBER,MMT.MEDICINE_NAME,MT.TRANS_DATE FROM (MIS_TRANS MT,MIS_MEDICINE_TYPES MMT)
+        WHERE MT.id = #{id}
+    </select>
+
+    <insert id="addRecord" parameterType="com.hbcmis.entity.repository.TransDo">
+        INSERT INTO MIS_TRANS VALUES (default ,#{transBill},#{transSource},#{transTarget},#{transType},#{transNumber},default)
+  	</insert>
+
+    <select id="selectBySource" resultType="com.hbcmis.entity.repository.TransDo">
+        SELECT * FROM MIS_TRANS MT
+        WHERE MT.TRANS_SOURCE = #{transSource}
+    </select>
+
+    <select id="selectByTarget" resultType="com.hbcmis.entity.repository.TransDo">
+        SELECT * FROM MIS_TRANS MT
+        WHERE MT.TRANS_TARGET = #{transTarget}
+    </select>
+
+    <select id="selectByDate" resultType="com.hbcmis.entity.repository.TransDo">
+        SELECT * FROM MIS_TRANS MT
+        WHERE MT.trans_date &lt; #{endDate}
+        AND MT.trans_date &gt; #{startDate}
+    </select>
+
+</mapper>

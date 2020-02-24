@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbcmis.mapper.RemainMapper">
+
+    <resultMap id="BaseResultMap" type="com.hbcmis.entity.repository.RemainDo">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="remainStore" jdbcType="INTEGER" property="remainStore"/>
+        <result column="remainNumber" jdbcType="INTEGER" property="remainNumber"/>
+        <result column="remainType" jdbcType="INTEGER" property="remainType"/>
+    </resultMap>
+
+    <select id="selectId" resultType="com.hbcmis.entity.repository.RemainDo">
+        SELECT * FROM MIS_REMAIN MR WHERE MR.id = #{id}
+    </select>
+
+    <select id="selectByTypeAndStore" resultType="com.hbcmis.entity.repository.RemainDo">
+        SELECT * FROM MIS_REMAIN MR
+        WHERE MR.REMAIN_STORE = #{remainStore}
+        AND MR.REMAIN_TYPE = #{remainType}
+    </select>
+
+    <select id="selectByStore" resultType="com.hbcmis.entity.repository.RemainDo">
+        SELECT * FROM MIS_REMAIN MR
+        WHERE MR.REMAIN_STORE = #{remainStore}
+    </select>
+
+    <select id="selectByType" resultType="com.hbcmis.entity.repository.RemainDo">
+        SELECT * FROM MIS_REMAIN MR
+        WHERE MR.REMAIN_TYPE = #{remainType}
+    </select>
+
+    <insert id="addRecord" parameterType="com.hbcmis.entity.repository.RemainDo">
+        INSERT INTO MIS_REMAIN VALUES (default ,#{remainStore},#{remainNumber},#{remainType})
+  	</insert>
+
+    <update id="updateRecord" parameterType="com.hbcmis.entity.repository.RemainDo">
+        update MIS_REMAIN
+        <set>
+            remain_number = #{remainNumber}
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

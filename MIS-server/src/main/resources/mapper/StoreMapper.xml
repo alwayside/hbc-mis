@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbcmis.mapper.StoreMapper">
+
+    <resultMap id="BaseResultMap" type="com.hbcmis.entity.repository.StoreDo">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="storeName" jdbcType="VARCHAR" property="storeName"/>
+        <result column="storeAddress" jdbcType="VARCHAR" property="toreAddress"/>
+        <result column="storeCapacity" jdbcType="BIGINT" property="storeCapacity"/>
+        <result column="storeCapacityUse" jdbcType="BIGINT" property="storeCapacityUse"/>
+        <result column="isDelete" jdbcType="INTEGER" property="isDelete"/>
+    </resultMap>
+
+    <select id="selectById" resultType="com.hbcmis.entity.repository.StoreDo">
+        SELECT * FROM MIS_STORE MS WHERE MS.id = #{id}
+    </select>
+
+
+    <select id="findById" resultType="com.hbcmis.entity.repository.StoreDo">
+        SELECT * FROM MIS_STORE MS WHERE MS.id = #{id} AND MS.is_delete != 1
+    </select>
+
+
+    <insert id="addNewStore" parameterType="com.hbcmis.entity.repository.StoreDo">
+        INSERT INTO MIS_STORE VALUES (default ,#{storeName},#{storeAddress},#{storeCapacity},#{storeCapacityUse},0)
+  	</insert>
+
+    <update id="updateStore" parameterType="com.hbcmis.entity.repository.StoreDo">
+        update MIS_STORE
+        <set>
+            <if test="storeName!=null and storeName!=''">
+                store_name = #{storeName},
+            </if>
+            <if test="storeAddress!=null and storeAddress!=''">
+                store_address = #{storeAddress},
+            </if>
+            <if test="storeCapacity!=null and storeCapacity!=''">
+                store_capacity = #{storeCapacity},
+            </if>
+            is_delete = 0
+        </set>
+        where id=#{id}
+    </update>
+
+    <update id="deleteStore" parameterType="com.hbcmis.entity.repository.StoreDo">
+        update MIS_STORE
+        <set>
+            is_delete = 1
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

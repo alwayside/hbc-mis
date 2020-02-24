@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbcmis.mapper.FinanceMapper">
+
+    <resultMap id="BaseResultMap" type="com.hbcmis.entity.repository.FinanceDo">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="financeBill" jdbcType="BIGINT" property="financeBill"/>
+        <result column="financeSum" jdbcType="DECIMAL" property="financeSum"/>
+        <result column="financeDate" jdbcType="TIMESTAMP" property="financeDate"/>
+        <result column="financeType" jdbcType="INTEGER" property="financeType"/>
+    </resultMap>
+
+
+    <select id="selectById" resultType="com.hbcmis.entity.repository.FinanceDo">
+        SELECT * FROM MIS_FINANCE MF WHERE MF.id = #{id}
+    </select>
+
+    <select id="selectByBill" resultType="com.hbcmis.entity.repository.FinanceDo">
+        SELECT * FROM MIS_FINANCE WHERE FINANCE_BILL = #{financeBill}
+    </select>
+
+    <select id="selectByDate" resultType="com.hbcmis.entity.repository.FinanceDo">
+        SELECT * FROM MIS_FINANCE MF
+        WHERE MF.sell_date &lt; #{endDate}
+        AND MF.sell_date &gt; #{startDate}
+    </select>
+
+
+    <insert id="addRecord" parameterType="com.hbcmis.entity.repository.FinanceDo">
+        INSERT INTO MIS_FINANCE VALUES (default ,#{financeBill},#{financeSum},default,#{financeType})
+  	</insert>
+
+
+    <delete id="deleteRecord" parameterType="com.hbcmis.entity.repository.FinanceDo">
+        DELETE FROM MIS_FINANCE MF WHERE MF.id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,155 @@
+.topBar {
+  position: absolute;
+  top: 0;
+}
+.innerBtn {
+  height:60px!important;
+  width:200px!important;
+  font-size: 14px!important;
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
+  color: #fff!important;
+  border-radius:0!important;
+}
+.carouselSpan span {
+  display: inline-block;
+  opacity: 0;
+  transform: translate(100px, 0);
+  animation: topBottom 1s forwards;
+}
+
+@keyframes topBottom {
+  10% {
+    opacity: 0.1
+  }
+  80% {
+    opacity: 0.5
+  }
+  90% {
+    opacity: 0.7
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+.carouselSpan1 span {
+  display: inline-block;
+  opacity: 0;
+  transform: translate(100px, 0);
+  animation: topBottom1 1.5s forwards;
+}
+
+@keyframes topBottom1 {
+  30% {
+    opacity: 0.0
+  }
+  40% {
+    opacity: 0.1
+  }
+  82% {
+    opacity: 0.5
+  }
+  93% {
+    opacity: 0.7
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+.carouselSpan2 span {
+  display: inline-block;
+  opacity: 0;
+  transform: translate(0, 100px);
+  animation: topBottom1 2s forwards;
+}
+
+@keyframes topBottom2 {
+  50% {
+    opacity:0
+  }
+  55% {
+    opacity: 0.1
+  }
+  90% {
+    opacity: 0.5
+  }
+  95% {
+    opacity: 0.7
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+.v-card__text {
+  color: #000000!important;
+}
+.div_line {
+  border-top-color:transparent;
+  border-left-width:0;
+  border-right-width:0;
+  border-bottom-color:#bdbdbd;
+  border-bottom-width: 1px;
+  border-style: solid
+}
+.appBarBtn {
+  opacity:1;
+  border-style: solid;
+  border-left-color: #ffffff!important;
+  border-right-color: #ffffff!important;
+  border-top-color: #ffffff!important;
+  border-width: 5px 0 5px 0;
+  background-color: #ffffff!important;
+  font-size: 14px;
+}
+.appBarBtn:hover{
+  opacity: 0.7;
+}
+.appBarBtn:before{
+  background-color:#ffffff!important;
+}
+.languageBtn{
+  width: 120px;
+}
+.languageBtn:hover{
+  color: #4caf50!important;
+}
+.helpMenu {
+  opacity:1;
+  border-style: solid;
+  border-left-color: #ffffff!important;
+  border-right-color: #ffffff!important;
+  border-top-color: #ffffff!important;
+  border-width: 5px 0 5px 0;
+  background-color: #ffffff!important;
+  font-size: 14px;
+  width: 100px;
+}
+.helpMenu :hover{
+  opacity: 0.7;
+}
+.div_bg {
+  background-size:cover;
+  background-position:center,center;
+  height:180px;
+  width:100%;
+}
+.Msg{
+  text-indent:2em!important;
+  text-align: left;
+}
+.blankDiv {
+  background: transparent;
+}
+
+.v-content__wrap{
+  min-height: calc(100vh - 60px)!important;
+}
+
+v-application v-application--is-ltr theme--light{
+  margin-top: 0!important;
+}
