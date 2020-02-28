@@ -3,7 +3,9 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/view/HelloWorld'
 import purchase from '../components/view/purchase'
 import purchaseView from '../components/view/purchase/purchaseView'
-import DevelopDoc from '../components/view/DevelopDoc'
+import Medicine from '../components/view/medicine'
+import medicineView from '../components/view/medicine/medicineView'
+import medicineAdd from '../components/view/medicine/medicineAdd'
 import BuildOnline from '../components/view/BuildOnline'
 import DownloadCenter from '../components/view/DownloadCenter'
 import Help from '../components/view/HelpMenu/Help'
@@ -36,12 +38,28 @@ const router = new Router({
       // }
     },
     {
-      path: '/DevelopDoc',
-      name: 'DevelopDoc',
-      component: DevelopDoc,
-      meta: {
-        requiresAuth: true
-      }
+      path: '/medicine',
+      name: 'medicine',
+      component: Medicine
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/medicine/records',
+      name: 'medicineView',
+      component: medicineView
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/medicine/add',
+      name: 'medicineAdd',
+      component: medicineAdd
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: '/BuildOnline',

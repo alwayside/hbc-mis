@@ -35,7 +35,6 @@ export default {
   .footer-border-top {
     border-top: solid 0px;
     /*background-image: linear-gradient(to right , #FFFFFF, #43A047 )*/
-    z-index: 60!important;
     position: relative;
   }
 </style>

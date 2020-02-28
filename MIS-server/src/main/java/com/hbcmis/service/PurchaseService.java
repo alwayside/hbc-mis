@@ -1,6 +1,7 @@
 package com.hbcmis.service;
 
 import com.hbcmis.entity.dto.PurchaseDto;
+import com.hbcmis.entity.dto.TimeDto;
 import com.hbcmis.entity.repository.PurchaseDo;
 import com.hbcmis.mapper.PurchaseMapper;
 import com.hbcmis.utils.BillBuilder;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -47,4 +49,12 @@ public class PurchaseService {
 
     public List<PurchaseDto> selectAllRecord() { return purchaseMapper.selectAll(); }
 
+    public List<PurchaseDto> selectRecordByFilter(Integer purchaseType, Integer purchaseStore, Long bill, TimeDto timeDto) {
+        Timestamp begin = timeDto.getBeginDate();
+        Timestamp end = timeDto.getEndDate();
+        if(end == null) {
+            begin = null;
+        }
+        return purchaseMapper.selectByFilter(purchaseType,  purchaseStore, bill, begin, end);
+    }
 }

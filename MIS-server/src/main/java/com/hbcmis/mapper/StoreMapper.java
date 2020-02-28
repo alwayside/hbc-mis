@@ -49,4 +49,6 @@ public interface StoreMapper {
      * @return
      */
     public List<StoreDo> findById(@Param("id") int id);
+
+    List<StoreDo> selectAll();
 }

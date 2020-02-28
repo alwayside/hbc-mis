@@ -51,9 +51,9 @@
       @click.native="btnOn(0)"
       class="appBarBtn"
       :height=appBarHeight
-      to="/purchase"
+      to="/medicine"
     >
-      {{ $t('purchase')}}
+      {{ $t('medicine')}}
     </v-btn>
     <v-btn
       elevation="0"

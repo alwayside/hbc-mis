@@ -85,4 +85,6 @@ public interface MedicineMapper {
      * @return
      */
     public List<MedicineDo> findById(@Param("id") int id);
+
+    List<MedicineDo> selectByFilter(@Param("medicineProducer") String medicineProducer,@Param("medicineName")  String medicineName);
 }

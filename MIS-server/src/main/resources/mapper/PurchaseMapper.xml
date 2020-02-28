@@ -63,6 +63,26 @@
 		AND MMT.id = MP.purchase_type
     </select>
 
+    <select id="selectByFilter" resultType="com.hbcmis.entity.dto.PurchaseDto">
+        SELECT MP.*,MMT.MEDICINE_NAME,MS.STORE_NAME
+        FROM (MIS_PURCHASE MP,MIS_MEDICINE_TYPES MMT,MIS_STORE MS)
+        WHERE MS.id = MP.purchase_store
+		AND MMT.id = MP.purchase_type
+        <if test="begin != null">
+            AND MP.purchase_date between #{begin} and #{end}
+        </if>
+        <if test="purchaseType != null and purchaseType != ''">
+            AND MP.purchase_type = #{purchaseType}
+        </if>
+        <if test="purchaseStore != null and purchaseStore != ''">
+            AND MP.purchase_store = #{purchaseStore}
+        </if>
+        <if test="bill != null and bill != ''">
+            AND MP.purchase_bill = #{bill}
+        </if>
+
+    </select>
+
     <insert id="addRecord" parameterType="com.hbcmis.entity.repository.PurchaseDo">
         INSERT INTO MIS_PURCHASE VALUES (default ,#{purchaseBill},#{purchaseNumber},#{purchaseType},default ,#{purchaseStore})
   	</insert>

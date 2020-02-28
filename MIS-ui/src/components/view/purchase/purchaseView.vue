@@ -16,7 +16,79 @@
 <!--      </v-card-title>-->
       <v-card-text>
         <v-row>
-          <v-col sm="2"><v-btn color='deep-purple accent-4' block dark @click=getDate()>{{$t('Query')}}</v-btn></v-col>
+          <v-col sm="3">
+            <v-btn color='deep-purple accent-4' block dark @click=getDate() class="mb-1">{{$t('Query')}}</v-btn>
+            <v-menu
+              ref="dateStart"
+              v-model="menu"
+              :close-on-content-click="false"
+              :return-value.sync="date"
+              transition="scale-transition"
+              offset-y
+              max-width="290px"
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="dates[0]"
+                  :label="$t('startDate')"
+                  prepend-icon="event"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="dates[0]"
+                type="month"
+                no-title
+                scrollable
+              >
+
+              </v-date-picker>
+            </v-menu>
+            <v-menu
+              ref="dateEnd"
+              v-model="menu2"
+              :close-on-content-click="false"
+              :return-value.sync="date"
+              transition="scale-transition"
+              offset-y
+              max-width="290px"
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="dates[1]"
+                  :label="$t('endDate')"
+                  prepend-icon="event"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="dates[1]"
+                type="month"
+                no-title
+                scrollable
+              >
+
+              </v-date-picker>
+            </v-menu>
+            <v-text-field
+              v-model="bill"
+              :label="$t('Bill')"
+            />
+            <v-select
+              v-model="selectType"
+              :items="typeItems"
+              :label="$t('medicineName')"
+            ></v-select>
+            <v-select
+              v-model="selectStore"
+              :items="storeItems"
+              :label="$t('Store')"
+            ></v-select>
+          </v-col>
           <v-col>
             <v-data-table
               :headers="headers"
@@ -47,19 +119,16 @@ export default {
     bgSrc: window.localStorage.getItem('bgPic'),
     msg: 'Welcome to Your Vue.js App',
     headers: [],
-    items: [
-      {id: 1},
-      {id: 2},
-      {id: 3},
-      {id: 4},
-      {id: 5},
-      {id: 6},
-      {id: 7},
-      {id: 8},
-      {id: 9},
-      {id: 10},
-      {id: 11, purchaseBill: 111}
-    ]
+    items: [],
+    typeItems: [],
+    selectType: '',
+    storeItems: [],
+    selectStore: '',
+    menu: false,
+    menu2: false,
+    dates: [],
+    date: new Date().toISOString().substr(0, 7),
+    bill: ''
   }),
   methods: {
     setHeaders () {
@@ -84,13 +153,38 @@ export default {
     },
 
     getDate () {
-      this.$axios({ method: 'get', url: '/Purchase/all' }).then((res) => {
+      let timeDto = {
+        beginDate: new Date(this.dates[0]).getTime(),
+        endDate: new Date(this.dates[1]).getTime()
+      }
+      let url = '/Purchase/record?purchaseType=' + this.selectType + '&purchaseStore=' + this.selectStore + '&bill=' + this.bill
+      this.$axios.post(url, timeDto).then((res) => {
         if (res.status === 200) {
           res.data.forEach((item) => {
             item.date = this.formatDate(item.purchaseDate).toString()
-            console.log(item.date)
           })
           this.items = res.data
+        }
+      })
+    },
+
+    getStoreAndMedicine () {
+      this.$axios.get('/Medicine/all').then((res) => {
+        if (res.status === 200) {
+          const result = []
+          res.data.forEach((item) => {
+            result.push({text: item.medicineName + '-' + item.medicineProducer, value: item.id})
+          })
+          this.typeItems = result
+        }
+      })
+      this.$axios.get('/Store/all').then((res) => {
+        if (res.status === 200) {
+          const result = []
+          res.data.forEach((item) => {
+            result.push({text: item.storeName, value: item.id})
+          })
+          this.storeItems = result
         }
       })
     }
@@ -114,6 +208,7 @@ export default {
   },
   mounted: function () {
     this.setHeaders()
+    this.getStoreAndMedicine()
   }
 }
 </script>

@@ -5,6 +5,8 @@ import com.hbcmis.mapper.StoreMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author hbc-asuna
  */
@@ -41,5 +43,9 @@ public class StoreService {
             return true;
         }
         return false;
+    }
+
+    public List<StoreDo> selectAllRecord() {
+        return storeMapper.selectAll();
     }
 }

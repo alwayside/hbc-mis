@@ -5,10 +5,9 @@ import com.hbcmis.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author hbc-asuna
@@ -36,5 +35,11 @@ public class StoreController {
     public ResponseEntity<?> deleteStore(@RequestBody StoreDo storeDo){
         storeService.deleteStore(storeDo);
         return new ResponseEntity<>("success",HttpStatus.OK);
+    }
+
+    @GetMapping("all")
+    public ResponseEntity<?> selectAllRecord(){
+        List<StoreDo> storeDoList = storeService.selectAllRecord();
+        return new ResponseEntity<>(storeDoList,HttpStatus.OK);
     }
 }

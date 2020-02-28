@@ -74,6 +74,7 @@ public class MedicineService {
     }
 
     public List<MedicineDo> selectByProducer(String producer) {
+        producer = "%" + producer + "%";
         return medicineMapper.selectByProducer(producer);
     }
 
@@ -102,5 +103,15 @@ public class MedicineService {
 
     private void delete(MedicineDo medicineDo) {
         medicineMapper.deleteMedicine(medicineDo.getId());
+    }
+
+    public List<MedicineDo> selectAllRecord() {
+        return medicineMapper.selectAll();
+    }
+
+    public List<MedicineDo> selectRecordByFilter(String producer, String name) {
+        name = "%" + name + "%";
+        producer = "%" + producer + "%";
+        return medicineMapper.selectByFilter(producer, name);
     }
 }

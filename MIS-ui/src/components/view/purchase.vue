@@ -27,11 +27,11 @@
           <v-col class="d-flex align-center justify-center">
             <div>
               <v-btn to="/purchase/records"  class="innerBtn mb-2 mt-4">
-                {{$t('monitoring')}}
+                {{$t('medicinePurchase')}}
               </v-btn>
             </div>
           </v-col>
-          <v-col sm="1"></v-col>
+          <v-col sm="2"></v-col>
         </v-row>
       </v-card-text>
     </v-card>

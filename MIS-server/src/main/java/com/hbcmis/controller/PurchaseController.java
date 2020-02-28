@@ -5,7 +5,9 @@ package com.hbcmis.controller;
  */
 
 import com.hbcmis.entity.dto.PurchaseDto;
+import com.hbcmis.entity.dto.TimeDto;
 import com.hbcmis.entity.repository.MedicineDo;
+import com.hbcmis.entity.repository.PurchaseDo;
 import com.hbcmis.service.MedicineService;
 import com.hbcmis.service.PurchaseService;
 import com.hbcmis.service.StoreService;
@@ -50,6 +52,14 @@ public class PurchaseController {
         return new ResponseEntity<>(purchaseDtoList, HttpStatus.OK);
     }
 
+    @PostMapping("/record")
+    public ResponseEntity<?> selectRecordByFilter(@RequestBody TimeDto timeDto,
+                                                  @RequestParam(value = "purchaseType", required = false) Integer purchaseType,
+                                                  @RequestParam(required = false) Integer purchaseStore,
+                                                  @RequestParam(required = false) Long bill) {
+        List<PurchaseDto> purchaseDtoList = purchaseService.selectRecordByFilter(purchaseType,purchaseStore,bill,timeDto);
+        return new ResponseEntity<>(purchaseDtoList, HttpStatus.OK);
+    }
 //    @GetMapping("/date")
 //    public ResponseEntity<?> selectByProducer() {
 //        List<PurchaseDto> medicineDoList = medicineService.selectAll();
