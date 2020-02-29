@@ -82,11 +82,13 @@
               v-model="selectType"
               :items="typeItems"
               :label="$t('medicineName')"
+              :menu-props="{ auto: true, overflowY: true }"
             ></v-select>
             <v-select
               v-model="selectStore"
               :items="storeItems"
               :label="$t('Store')"
+              :menu-props="{ auto: true, overflowY: true }"
             ></v-select>
           </v-col>
           <v-col>

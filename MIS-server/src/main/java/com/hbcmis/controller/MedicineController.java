@@ -69,15 +69,16 @@ public class MedicineController {
     public ResponseEntity<?> selectRecordByFilter(@RequestParam(required = false) String producer,
                                                   @RequestParam(required = false) String name) {
         List<MedicineDo> medicineDoList;
-        if (producer == null || "".equals(producer)) {
-            medicineDoList = medicineService.selectByName(name);
-        } else if (name == null || "".equals(name)) {
-            medicineDoList = medicineService.selectByProducer(producer);
-        } else if (!(producer == null || "".equals(producer)) && !(name == null || "".equals(name))) {
-            medicineDoList = medicineService.selectRecordByFilter(producer, name);
-        } else {
-            medicineDoList = medicineService.selectAll();
-        }
+//        if (producer == null || "".equals(producer)) {
+//            medicineDoList = medicineService.selectByName(name);
+//        } else if (name == null || "".equals(name)) {
+//            medicineDoList = medicineService.selectByProducer(producer);
+//        } else if (!(producer == null || "".equals(producer)) && !(name == null || "".equals(name))) {
+//            medicineDoList = medicineService.selectRecordByFilter(producer, name);
+//        } else {
+//            medicineDoList = medicineService.selectAll();
+//        }
+        medicineDoList = medicineService.selectRecordByFilter(producer, name);
         return new ResponseEntity<>(medicineDoList, HttpStatus.OK);
     }
 

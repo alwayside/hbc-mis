@@ -1,5 +1,6 @@
 package com.hbcmis.mapper;
 
+import com.hbcmis.entity.dto.RemainDto;
 import com.hbcmis.entity.repository.AdminDo;
 import com.hbcmis.entity.repository.RemainDo;
 import org.apache.ibatis.annotations.Param;
@@ -34,4 +35,12 @@ public interface RemainMapper {
      * @param remainNumber
      */
     public void updateRecord(@Param("id")int id,@Param("remainNumber")int remainNumber);
+
+    List<RemainDto> selectAll();
+
+    List<RemainDto> selectByName(String storeName);
+
+    List<RemainDto> selectByMedicine(String medicineName);
+
+    List<RemainDto> selectByFilter(@Param("medicineName")String medicineName,@Param("storeName") String storeName);
 }

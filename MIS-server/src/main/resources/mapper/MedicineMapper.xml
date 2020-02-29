@@ -27,11 +27,11 @@
 
     <select id="selectByFilter" resultType="com.hbcmis.entity.repository.MedicineDo">
         SELECT * FROM  MIS_MEDICINE_TYPES WHERE is_delete != 1
-        <if test="medicineName != null and medicineName != ''">
+        <if test="medicineName != null and medicineName != '%%'">
         AND medicine_name LIKE #{medicineName}
         </if>
-        <if test="medicineProducer != null and medicineProducer != ''">
-        AND medicine_producer = LIKE #{medicineProducer}
+        <if test="medicineProducer != null and medicineProducer != '%%'">
+        AND medicine_producer LIKE #{medicineProducer}
         </if>
     </select>
 

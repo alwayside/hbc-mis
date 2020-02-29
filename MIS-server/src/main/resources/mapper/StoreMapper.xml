@@ -27,8 +27,13 @@
 
     <select id="selectByFilter" resultType="com.hbcmis.entity.repository.StoreDo">
         SELECT * FROM MIS_STORE MS WHERE MS.is_delete != 1
-        AND store_name LIKE #{storeName}
-        AND store_address LIKE #{storeAddress}
+        <if test="storeName != null and storeName != ''">
+        AND store_name = #{storeName}
+        </if>
+        <if test="storeAddress != null and storeAddress != '%%'">
+            AND store_address = #{storeAddress}
+        </if>
+
     </select>
 
     <select id="selectAll" resultType="com.hbcmis.entity.repository.StoreDo">

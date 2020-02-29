@@ -60,6 +60,7 @@ public class StoreService {
     }
 
     public List<StoreDo> selectRecordByFilter(String storeName, String storeAddress) {
+        storeAddress = "%" + storeAddress + "%";
         return storeMapper.selectByFilter(storeName, storeAddress);
     }
 }

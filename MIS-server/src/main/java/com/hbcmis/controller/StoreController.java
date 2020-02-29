@@ -47,15 +47,7 @@ public class StoreController {
     public ResponseEntity<?> selectRecordByFilter(@RequestParam(required = false) String storeName,
                                                   @RequestParam(required = false) String storeAddress) {
         List<StoreDo> medicineDoList;
-        if (storeName == null || "".equals(storeName)) {
-            medicineDoList = storeService.selectByAddress(storeAddress);
-        } else if (storeAddress == null || "".equals(storeAddress)) {
-            medicineDoList = storeService.selectByName(storeName);
-        } else if (!(storeName == null || "".equals(storeName)) && !(storeAddress == null || "".equals(storeAddress))) {
-            medicineDoList = storeService.selectRecordByFilter(storeName, storeAddress);
-        } else {
-            medicineDoList = storeService.selectAllRecord();
-        }
+        medicineDoList = storeService.selectRecordByFilter(storeName, storeAddress);
         return new ResponseEntity<>(medicineDoList, HttpStatus.OK);
     }
 }

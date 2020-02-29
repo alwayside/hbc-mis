@@ -9,6 +9,42 @@
         <result column="remainType" jdbcType="INTEGER" property="remainType"/>
     </resultMap>
 
+    <select id="selectAll" resultType="com.hbcmis.entity.dto.RemainDto">
+        SELECT MR.*,MMT.*,MS.STORE_NAME
+        FROM (MIS_REMAIN MR,MIS_MEDICINE_TYPES MMT,MIS_STORE MS)
+        WHERE MS.id = MR.remain_store
+		AND MMT.id = MR.remain_type
+    </select>
+
+    <select id="selectByName" resultType="com.hbcmis.entity.dto.RemainDto">
+        SELECT MR.*,MMT.*,MS.STORE_NAME
+        FROM (MIS_REMAIN MR,MIS_MEDICINE_TYPES MMT,MIS_STORE MS)
+        WHERE MS.id = MR.remain_store
+		AND MMT.id = MR.remain_type
+		AND MS.STORE_NAME = #{storeName}
+    </select>
+
+    <select id="selectByMedicine" resultType="com.hbcmis.entity.dto.RemainDto">
+        SELECT MR.*,MMT.*,MS.STORE_NAME
+        FROM (MIS_REMAIN MR,MIS_MEDICINE_TYPES MMT,MIS_STORE MS)
+        WHERE MS.id = MR.remain_store
+		AND MMT.id = MR.remain_type
+		AND MMT.medicine_name = #{medicineName}
+    </select>
+
+    <select id="selectByFilter" resultType="com.hbcmis.entity.dto.RemainDto">
+        SELECT MR.*,MMT.*,MS.STORE_NAME
+        FROM (MIS_REMAIN MR,MIS_MEDICINE_TYPES MMT,MIS_STORE MS)
+        WHERE MS.id = MR.remain_store
+		AND MMT.id = MR.remain_type
+        <if test="medicineName!=null and medicineName!='%%'">
+            AND MMT.medicine_name LIKE #{medicineName}
+        </if>
+        <if test="storeName!=null and storeName!='%%'">
+            AND MS.STORE_NAME LIKE #{storeName}
+        </if>
+    </select>
+
     <select id="selectId" resultType="com.hbcmis.entity.repository.RemainDo">
         SELECT * FROM MIS_REMAIN MR WHERE MR.id = #{id}
     </select>

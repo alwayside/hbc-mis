@@ -1,5 +1,6 @@
 package com.hbcmis.service;
 
+import com.hbcmis.entity.dto.RemainDto;
 import com.hbcmis.entity.repository.RemainDo;
 import com.hbcmis.mapper.RemainMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,15 @@ public class RemainService {
 
     @Autowired
     RemainMapper remainMapper;
+
+
+    public List<RemainDto> selectAll() {
+        return remainMapper.selectAll();
+    }
+
+    public List<RemainDto> selectByName(String storeName) {
+        return remainMapper.selectByName(storeName);
+    }
 
     /**
      * 增加库存
@@ -44,6 +54,7 @@ public class RemainService {
 
     /**
      * 减少库存
+     *
      * @param store
      * @param type
      * @param count
@@ -67,5 +78,15 @@ public class RemainService {
         int id = remainDo.getId();
         int number = remainDo.getRemainNumber();
         remainMapper.updateRecord(id, number);
+    }
+
+    public List<RemainDto> selectByMedicine(String medicineName) {
+        return remainMapper.selectByMedicine(medicineName);
+    }
+
+    public List<RemainDto> selectByFilter(String storeName, String medicineName) {
+        medicineName = "%" + medicineName + "%";
+        storeName = "%" + storeName + "%";
+        return remainMapper.selectByFilter(medicineName, storeName);
     }
 }

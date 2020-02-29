@@ -19,12 +19,12 @@
           <v-col sm="3">
             <v-btn color='deep-purple accent-4' block dark @click=getDate() class="mb-1">{{$t('Query')}}</v-btn>
             <v-text-field
-              v-model="producer"
-              :label="$t('producer')"
-            />
-            <v-text-field
               v-model="storeName"
               :label="$t('storeName')"
+            />
+            <v-text-field
+              v-model="medicineName"
+              :label="$t('medicineName')"
             />
           </v-col>
           <v-col>
@@ -60,22 +60,21 @@ export default {
     msg: 'Welcome to Your Vue.js App',
     headers: [],
     items: [],
-    producer: '',
-    storeName: ''
+    storeName: '',
+    medicineName: ''
   }),
   methods: {
     setHeaders () {
       this.headers = [
         { text: this.$t('storeName'), value: 'storeName' },
-        { text: this.$t('producer'), value: 'storeProducer' },
-        { text: this.$t('Price'), value: 'storePrice' },
-        { text: this.$t('Unit'), value: 'storeUnit' },
-        { text: this.$t('Description'), value: 'storeDescription' }
+        { text: this.$t('medicineName'), value: 'medicineName' },
+        { text: this.$t('remain'), value: 'remainNumber' },
+        { text: this.$t('Unit'), value: 'medicineUnit' }
       ]
     },
 
     getDate () {
-      let url = '/store/record?name=' + this.storeName + '&producer=' + this.producer
+      let url = '/Remain/all?storeName=' + this.storeName + '&medicineName=' + this.medicineName
       this.$axios.get(url).then((res) => {
         if (res.status === 200) {
           this.items = res.data

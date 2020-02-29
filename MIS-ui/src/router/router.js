@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/view/HelloWorld'
 import purchase from '../components/view/purchase'
 import purchaseView from '../components/view/purchase/purchaseView'
+import purchasMedicine from '../components/view/purchase/purchaseMedicine'
 import Medicine from '../components/view/medicine'
 import medicineView from '../components/view/medicine/medicineView'
 import medicineAdd from '../components/view/medicine/medicineAdd'
@@ -12,9 +13,6 @@ import storeView from '../components/view/store/storeView'
 import storeAdd from '../components/view/store/storeAdd'
 import storeManage from '../components/view/store/storeManage'
 import storeRemain from '../components/view/store/storeRemain'
-import DownloadCenter from '../components/view/DownloadCenter'
-import Help from '../components/view/HelpMenu/Help'
-import Question from '../components/view/HelpMenu/FAQ'
 
 Vue.use(Router)
 
@@ -38,6 +36,14 @@ const router = new Router({
       path: '/purchase/records',
       name: 'purchaseView',
       component: purchaseView
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/purchase/medicine',
+      name: 'purchasMedicine',
+      component: purchasMedicine
       // meta: {
       //   requiresAuth: true
       // }
@@ -113,24 +119,6 @@ const router = new Router({
       // meta: {
       //   requiresAuth: true
       // }
-    },
-    {
-      path: '/DownloadCenter',
-      name: 'DownloadCenter',
-      component: DownloadCenter,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/Help',
-      name: 'Help',
-      component: Help
-    },
-    {
-      path: '/FAQ',
-      name: 'Question',
-      component: Question
     }
   ]
 })
