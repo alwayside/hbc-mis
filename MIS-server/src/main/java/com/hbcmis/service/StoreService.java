@@ -48,4 +48,18 @@ public class StoreService {
     public List<StoreDo> selectAllRecord() {
         return storeMapper.selectAll();
     }
+
+    public List<StoreDo> selectByAddress(String storeAddress) {
+        storeAddress = "%" + storeAddress + "%";
+        return storeMapper.selectByAddress(storeAddress);
+    }
+
+    public List<StoreDo> selectByName(String storeName) {
+        storeName = "%" + storeName + "%";
+        return storeMapper.selectByName(storeName);
+    }
+
+    public List<StoreDo> selectRecordByFilter(String storeName, String storeAddress) {
+        return storeMapper.selectByFilter(storeName, storeAddress);
+    }
 }

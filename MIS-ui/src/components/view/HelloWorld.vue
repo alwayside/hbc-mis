@@ -59,7 +59,7 @@ export default {
         },
         img: '',
         src: 'https://picsum.photos/1920/1080?random',
-        btn: 'http://10.45.4.162:8585/'
+        btn: ''
       }
     ],
     srcUrl: '',

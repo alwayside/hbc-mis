@@ -6,7 +6,12 @@ import purchaseView from '../components/view/purchase/purchaseView'
 import Medicine from '../components/view/medicine'
 import medicineView from '../components/view/medicine/medicineView'
 import medicineAdd from '../components/view/medicine/medicineAdd'
-import BuildOnline from '../components/view/BuildOnline'
+import medicineManage from '../components/view/medicine/medicineManage'
+import Store from '../components/view/store'
+import storeView from '../components/view/store/storeView'
+import storeAdd from '../components/view/store/storeAdd'
+import storeManage from '../components/view/store/storeManage'
+import storeRemain from '../components/view/store/storeRemain'
 import DownloadCenter from '../components/view/DownloadCenter'
 import Help from '../components/view/HelpMenu/Help'
 import Question from '../components/view/HelpMenu/FAQ'
@@ -62,12 +67,52 @@ const router = new Router({
       // }
     },
     {
-      path: '/BuildOnline',
-      name: 'BuildOnline',
-      component: BuildOnline,
-      meta: {
-        requiresAuth: true
-      }
+      path: '/medicine/manage',
+      name: 'medicineManage',
+      component: medicineManage
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/store',
+      name: 'Store',
+      component: Store
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/store/records',
+      name: 'storeView',
+      component: storeView
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/store/add',
+      name: 'storeAdd',
+      component: storeAdd
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/store/manage',
+      name: 'storeManage',
+      component: storeManage
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/store/remain',
+      name: 'storeRemain',
+      component: storeRemain
+      // meta: {
+      //   requiresAuth: true
+      // }
     },
     {
       path: '/DownloadCenter',

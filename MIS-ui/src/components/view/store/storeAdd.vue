@@ -5,10 +5,10 @@
       :src="bgSrc"
     >
       <div class="carouselSpan mb-2">
-        <span class="display-1" style="width: 50%">{{ $t('medicineSystem')}}</span>
+        <span class="display-1" style="width: 50%">{{ $t('storeSystem')}}</span>
       </div>
       <div class="carouselSpan1 ma-2">
-        <span class="subtitle-1" style="width: 66%">{{$t('medicineSystemMsg')}}</span>
+        <span class="subtitle-1" style="width: 66%">{{$t('storeSystemMsg')}}</span>
       </div>
     </v-parallax>
     <v-card elevation="0">
@@ -31,22 +31,22 @@
           <v-col sm="1"></v-col>
           <v-col>
 
-            <span class="title">{{$t('medicineAdd')}}</span>
+            <span class="title">{{$t('storeAdd')}}</span>
           </v-col>
           <v-col sm="1"></v-col>
         </v-row>
         <v-row><v-col sm="1"></v-col>
           <v-col>
               <v-text-field
-                v-model="medicineName"
-                :label="$t('medicineName')"
+                v-model="storeName"
+                :label="$t('storeName')"
               />
           </v-col>
           <v-col sm="1"></v-col>
             <v-col>
               <v-text-field
-                v-model="producer"
-                :label="$t('producer')"
+                v-model="storeAddress"
+                :label="$t('storeAddress')"
               />
             </v-col><v-col sm="1"></v-col>
 
@@ -55,30 +55,19 @@
           <v-col>
             <v-text-field
               type="number"
-              v-model="medicinePrice"
-              :label="$t('Price')"
+              v-model="storeCapacity"
+              :label="$t('storeCapacity')"
             />
           </v-col>
           <v-col sm="1"></v-col>
           <v-col>
             <v-text-field
-              v-model="medicineUnit"
-              :label="$t('Unit')"
+            type="number"
+              v-model="storeCapacityUse"
+              :label="$t('storeCapacityUse')"
+              disabled
             />
           </v-col><v-col sm="1"></v-col>
-        </v-row>
-        <v-row>
-          <v-col sm="1"></v-col>
-          <v-col>
-            <v-textarea
-              class="mx-2"
-              :label="$t('Description')"
-              rows="2"
-              prepend-icon="comment"
-              v-model="medicineDescription"
-            ></v-textarea>
-          </v-col>
-          <v-col sm="1"></v-col>
         </v-row>
         <v-row>
           <v-col sm=5></v-col>
@@ -86,7 +75,7 @@
             <v-btn color='success' block dark @click=getDate() class="mb-1">{{$t('add')}}</v-btn>
           </v-col>
           <v-col sm="1">
-            <v-btn to="/medicine"  block color='success' dark >
+            <v-btn to="/store"  block color='success' dark >
               {{$t('return')}}
             </v-btn>
           </v-col >
@@ -104,11 +93,10 @@ export default {
   data: () => ({
     bgSrc: window.localStorage.getItem('bgPic'),
     msg: 'Welcome to Your Vue.js App',
-    producer: '',
-    medicineName: '',
-    medicinePrice: '',
-    medicineUnit: '',
-    medicineDescription: '',
+    storeName: '',
+    storeAddress: '',
+    storeCapacity: 0,
+    storeCapacityUse: 0,
     successAlter: false,
     errorAlter: false
   }),
@@ -116,21 +104,19 @@ export default {
     getDate () {
       this.successAlter = false
       this.errorAlter = false
-      let medicineDo = {
-        medicineProducer: this.producer,
-        medicineName: this.medicineName,
-        medicinePrice: this.medicinePrice,
-        medicineUnit: this.medicineUnit,
-        medicineDescription: this.medicineDescription
+      let storeDo = {
+        storeName: this.storeName,
+        storeAddress: this.storeAddress,
+        storeCapacity: this.storeCapacity,
+        storeCapacityUse: 0
       }
-      let url = '/Medicine/add'
-      this.$axios.put(url, medicineDo).then((res) => {
+      let url = '/Store/add'
+      this.$axios.put(url, storeDo).then((res) => {
         if (res.status === 200) {
-          this.producer = ''
-          this.medicineName = ''
-          this.medicinePrice = ''
-          this.medicineUnit = ''
-          this.medicineDescription = ''
+          this.storeName = ''
+          this.storeAddress = ''
+          this.storeCapacity = 0
+          this.storeCapacityUse = 0
           this.successAlter = true
         }
       }).catch((err) => {
@@ -149,10 +135,10 @@ export default {
     window.localStorage.setItem(
       'btnColor',
       [
+        'transparent',
+        'transparent',
+        'transparent',
         '#4caf50',
-        'transparent',
-        'transparent',
-        'transparent',
         'transparent',
         'transparent'
       ])

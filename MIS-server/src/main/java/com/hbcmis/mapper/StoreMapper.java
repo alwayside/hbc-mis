@@ -51,4 +51,10 @@ public interface StoreMapper {
     public List<StoreDo> findById(@Param("id") int id);
 
     List<StoreDo> selectAll();
+
+    List<StoreDo> selectByAddress(String storeAddress);
+
+    List<StoreDo> selectByName(String storeName);
+
+    List<StoreDo> selectByFilter(@Param("storeName")String storeName,@Param("storeAddress") String storeAddress);
 }

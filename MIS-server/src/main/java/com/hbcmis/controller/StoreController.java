@@ -19,19 +19,19 @@ public class StoreController {
     @Autowired
     StoreService storeService;
 
-    @PostMapping("/addNewStore")
+    @PutMapping("/add")
     public ResponseEntity<?> addNewStore(@RequestBody StoreDo storeDo){
         storeService.addNewStore(storeDo);
         return new ResponseEntity<>("success",HttpStatus.OK);
     }
 
-    @PostMapping("/updateStore")
+    @PostMapping("/update")
     public ResponseEntity<?> updateStore(@RequestBody StoreDo storeDo){
         storeService.updateStore(storeDo);
         return new ResponseEntity<>("success",HttpStatus.OK);
     }
 
-    @PostMapping("/deleteStore")
+    @DeleteMapping("/delete")
     public ResponseEntity<?> deleteStore(@RequestBody StoreDo storeDo){
         storeService.deleteStore(storeDo);
         return new ResponseEntity<>("success",HttpStatus.OK);
@@ -41,5 +41,21 @@ public class StoreController {
     public ResponseEntity<?> selectAllRecord(){
         List<StoreDo> storeDoList = storeService.selectAllRecord();
         return new ResponseEntity<>(storeDoList,HttpStatus.OK);
+    }
+
+    @GetMapping("/record")
+    public ResponseEntity<?> selectRecordByFilter(@RequestParam(required = false) String storeName,
+                                                  @RequestParam(required = false) String storeAddress) {
+        List<StoreDo> medicineDoList;
+        if (storeName == null || "".equals(storeName)) {
+            medicineDoList = storeService.selectByAddress(storeAddress);
+        } else if (storeAddress == null || "".equals(storeAddress)) {
+            medicineDoList = storeService.selectByName(storeName);
+        } else if (!(storeName == null || "".equals(storeName)) && !(storeAddress == null || "".equals(storeAddress))) {
+            medicineDoList = storeService.selectRecordByFilter(storeName, storeAddress);
+        } else {
+            medicineDoList = storeService.selectAllRecord();
+        }
+        return new ResponseEntity<>(medicineDoList, HttpStatus.OK);
     }
 }

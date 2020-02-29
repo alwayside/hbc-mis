@@ -15,6 +15,22 @@
         SELECT * FROM MIS_STORE MS WHERE MS.id = #{id}
     </select>
 
+    <select id="selectByAddress" resultType="com.hbcmis.entity.repository.StoreDo">
+        SELECT * FROM MIS_STORE MS WHERE MS.is_delete != 1
+        AND store_address LIKE #{storeAddress}
+    </select>
+
+    <select id="selectByName" resultType="com.hbcmis.entity.repository.StoreDo">
+        SELECT * FROM MIS_STORE MS WHERE MS.is_delete != 1
+        AND store_name LIKE #{storeName}
+    </select>
+
+    <select id="selectByFilter" resultType="com.hbcmis.entity.repository.StoreDo">
+        SELECT * FROM MIS_STORE MS WHERE MS.is_delete != 1
+        AND store_name LIKE #{storeName}
+        AND store_address LIKE #{storeAddress}
+    </select>
+
     <select id="selectAll" resultType="com.hbcmis.entity.repository.StoreDo">
         SELECT * FROM MIS_STORE MS WHERE MS.is_delete != 1
     </select>

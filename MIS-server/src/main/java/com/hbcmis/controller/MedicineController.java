@@ -38,7 +38,7 @@ public class MedicineController {
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     public ResponseEntity<?> updateMedicine(@RequestBody MedicineDo medicineDo) {
         if (medicineDo.getId() == 0) {
             return new ResponseEntity<>("Invalid values", HttpStatus.BAD_REQUEST);

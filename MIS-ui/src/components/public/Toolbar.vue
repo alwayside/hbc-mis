@@ -73,9 +73,9 @@
       @click.native="btnOn(2)"
       class="appBarBtn"
       :height=appBarHeight
-      to="/BuildOnline"
+      to="/sell"
     >
-      {{ $t('buildOnline')}}
+      {{ $t('sell')}}
     </v-btn>
     <v-btn
       elevation="0"
@@ -84,29 +84,21 @@
       @click.native="btnOn(3)"
       class="appBarBtn"
       :height=appBarHeight
-      to="/DownloadCenter"
+      to="/store"
     >
-      {{ $t('downloadCenter')}}
+      {{ $t('remain')}}
     </v-btn>
-        <v-menu offset-y>
-        <template v-slot:activator="{ on }">
-          <v-btn elevation="0"
-                 tile
-                 v-on="on"
-                 :height=appBarHeight
-                 class="helpMenu justify-space-around"
-                 :color="color[5]"
+     <v-btn elevation="0"
+
+      tile
+      :color="color[5]"
+      @click.native="btnOn(5)"
+      class="appBarBtn"
+      :height=appBarHeight
+      to="/DownloadCenter"
           >
-            {{$t('help')}}
-            <v-icon style="background-color: transparent!important;">mdi-menu-down</v-icon>
+            {{$t('finance')}}
           </v-btn>
-        </template>
-        <v-list class="pa-0">
-          <v-list-item v-for="(item, index) in helpMenu" :to="toHelp(index)" @click.native="btnOn(5)" :key="index">
-            <v-list-item-title style="font-size: 14px">{{$t(item)}}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
 
     <!--language select button-->
     <v-menu attach="" bottom left offset-y>
