@@ -1,2 +1,2 @@
 # hbc-mis
-hbc's mis
+北辰药业 Hbc-medical
