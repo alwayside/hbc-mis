@@ -44,6 +44,17 @@
           </v-col >
           <v-col class="d-flex align-center justify-center">
             <div>
+              <v-btn to="/sell/medicine"  class="innerBtn mb-2 mt-4">
+                {{$t('medicineSell')}}
+              </v-btn>
+            </div>
+          </v-col>
+          <v-col sm="2"></v-col>
+        </v-row>
+         <v-row>
+          <v-col sm="2"></v-col>
+          <v-col class="d-flex align-center justify-center">
+            <div>
               <v-btn to="/medicine/manage"  class="innerBtn mb-2 mt-4">
                 {{$t('medicineManage')}}
               </v-btn>

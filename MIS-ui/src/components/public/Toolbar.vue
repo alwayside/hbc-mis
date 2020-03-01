@@ -27,7 +27,7 @@
 
   ><router-link to="/" @click.native="btnOn(4)"><span class="d-flex align-center">
      <v-col width="60px"/>
-     LOGO
+     <img src="./assets/hbc_title.png" alt="hbc-medical" height="60">
    </span></router-link>
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
