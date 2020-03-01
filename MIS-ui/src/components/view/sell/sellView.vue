@@ -5,10 +5,10 @@
       :src="bgSrc"
     >
       <div class="carouselSpan mb-2">
-        <span class="display-1" style="width: 50%">{{ $t('purchaseSystem')}}</span>
+        <span class="display-1" style="width: 50%">{{ $t('sellSystem')}}</span>
       </div>
       <div class="carouselSpan1 ma-2">
-        <span class="subtitle-1" style="width: 66%">{{$t('purchaseSystemMsg')}}</span>
+        <span class="subtitle-1" style="width: 66%">{{$t('sellSystemMsg')}}</span>
       </div>
     </v-parallax>
     <v-card elevation="0">
@@ -102,7 +102,7 @@
           </v-col>
 
         </v-row>
-       <v-row>
+        <v-row>
           <v-col sm="1"></v-col>
           <v-col>
             <v-btn @click="$router.back(-1)"  block color='success' dark >
@@ -137,9 +137,9 @@ export default {
   methods: {
     setHeaders () {
       this.headers = [
-        { text: this.$t('Bill'), value: 'purchaseBill' },
+        { text: this.$t('Bill'), value: 'sellBill' },
         { text: this.$t('medicineName'), value: 'medicineName' },
-        { text: this.$t('Number'), value: 'purchaseNumber' },
+        { text: this.$t('sellNumber'), value: 'sellNumber' },
         { text: this.$t('Store'), value: 'storeName' },
         { text: this.$t('Date'), value: 'date' }
       ]
@@ -161,11 +161,11 @@ export default {
         beginDate: new Date(this.dates[0]).getTime(),
         endDate: new Date(this.dates[1]).getTime()
       }
-      let url = '/Purchase/record?purchaseType=' + this.selectType + '&purchaseStore=' + this.selectStore + '&bill=' + this.bill
+      let url = '/Sell/record?sellType=' + this.selectType + '&sellStore=' + this.selectStore + '&bill=' + this.bill
       this.$axios.post(url, timeDto).then((res) => {
         if (res.status === 200) {
           res.data.forEach((item) => {
-            item.date = this.formatDate(item.purchaseDate).toString()
+            item.date = this.formatDate(item.sellDate).toString()
           })
           this.items = res.data
         }
@@ -203,8 +203,8 @@ export default {
       'btnColor',
       [
         'transparent',
-        '#4caf50',
         'transparent',
+        '#4caf50',
         'transparent',
         'transparent',
         'transparent'

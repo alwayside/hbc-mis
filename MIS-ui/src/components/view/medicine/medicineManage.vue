@@ -43,7 +43,7 @@
         <v-row>
           <v-col sm="1"></v-col>
           <v-col>
-            <v-btn to="/medicine" block color="success" dark>{{$t('return')}}</v-btn>
+            <v-btn @click="$router.back(-1)" block color="success" dark>{{$t('return')}}</v-btn>
           </v-col>
           <v-col sm="1"></v-col>
         </v-row>

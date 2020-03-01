@@ -46,7 +46,7 @@ public class TransactionServiceImpl implements TransactionService {
         try {
             sellMapper.addRecord(sellBill, sellType, sellStore, sellNumber);
             remainService.numberReduce(sellStore,sellType,sellNumber);
-            financeService.purchase(sellBill,sellType,sellNumber);
+            financeService.sell(sellBill,sellType,sellNumber);
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             throw e;

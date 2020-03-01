@@ -5,10 +5,10 @@
       :src="bgSrc"
     >
       <div class="carouselSpan mb-2">
-        <span class="display-1" style="width: 50%">{{ $t('purchaseSystem')}}</span>
+        <span class="display-1" style="width: 50%">{{ $t('financeSystem')}}</span>
       </div>
       <div class="carouselSpan1 ma-2">
-        <span class="subtitle-1" style="width: 66%">{{$t('purchaseSystemMsg')}}</span>
+        <span class="subtitle-1" style="width: 66%">{{$t('financeSystemMsg')}}</span>
       </div>
     </v-parallax>
     <v-card elevation="0">
@@ -81,13 +81,7 @@
             <v-select
               v-model="selectType"
               :items="typeItems"
-              :label="$t('medicineName')"
-              :menu-props="{ auto: true, overflowY: true }"
-            ></v-select>
-            <v-select
-              v-model="selectStore"
-              :items="storeItems"
-              :label="$t('Store')"
+              :label="$t('financeType')"
               :menu-props="{ auto: true, overflowY: true }"
             ></v-select>
           </v-col>
@@ -102,7 +96,7 @@
           </v-col>
 
         </v-row>
-       <v-row>
+        <v-row>
           <v-col sm="1"></v-col>
           <v-col>
             <v-btn @click="$router.back(-1)"  block color='success' dark >
@@ -124,7 +118,8 @@ export default {
     msg: 'Welcome to Your Vue.js App',
     headers: [],
     items: [],
-    typeItems: [],
+    typeItems: [
+    ],
     selectType: '',
     storeItems: [],
     selectStore: '',
@@ -137,11 +132,15 @@ export default {
   methods: {
     setHeaders () {
       this.headers = [
-        { text: this.$t('Bill'), value: 'purchaseBill' },
-        { text: this.$t('medicineName'), value: 'medicineName' },
-        { text: this.$t('Number'), value: 'purchaseNumber' },
-        { text: this.$t('Store'), value: 'storeName' },
+        { text: this.$t('Bill'), value: 'financeBill' },
+        { text: this.$t('financeSum'), value: 'financeSum' },
+        { text: this.$t('financeType'), value: 'type' },
         { text: this.$t('Date'), value: 'date' }
+      ]
+      this.typeItems = [
+        { text: this.$t('sell'), value: 2 },
+        { text: this.$t('purchase'), value: 1 },
+        { text: this.$t('purchase') + '&' + this.$t('sell'), value: '' }
       ]
     },
 
@@ -155,43 +154,32 @@ export default {
       let second = now.getSeconds() // 返回日期中的秒数（0到59）
       return new Date(year + '-' + month + '-' + date + ' ' + hour + ':' + minute + ':' + second)
     },
+    formatType (type) {
+      if (type.toString() === '1') {
+        return this.$t('purchase')
+      }
+      if (type.toString() === '2') {
+        return this.$t('sell')
+      }
+    },
 
     getDate () {
       let timeDto = {
         beginDate: new Date(this.dates[0]).getTime(),
         endDate: new Date(this.dates[1]).getTime()
       }
-      let url = '/Purchase/record?purchaseType=' + this.selectType + '&purchaseStore=' + this.selectStore + '&bill=' + this.bill
+      let url = '/Finance/record?bill=' + this.bill + '&financeType=' + this.selectType
       this.$axios.post(url, timeDto).then((res) => {
         if (res.status === 200) {
           res.data.forEach((item) => {
-            item.date = this.formatDate(item.purchaseDate).toString()
+            item.date = this.formatDate(item.financeDate).toString()
+            item.type = this.formatType(item.financeType)
           })
           this.items = res.data
         }
       })
-    },
-
-    getStoreAndMedicine () {
-      this.$axios.get('/Medicine/all').then((res) => {
-        if (res.status === 200) {
-          const result = []
-          res.data.forEach((item) => {
-            result.push({text: item.medicineName + '-' + item.medicineProducer, value: item.id})
-          })
-          this.typeItems = result
-        }
-      })
-      this.$axios.get('/Store/all').then((res) => {
-        if (res.status === 200) {
-          const result = []
-          res.data.forEach((item) => {
-            result.push({text: item.storeName, value: item.id})
-          })
-          this.storeItems = result
-        }
-      })
     }
+
   },
   computed: {
     area () {
@@ -203,16 +191,15 @@ export default {
       'btnColor',
       [
         'transparent',
-        '#4caf50',
         'transparent',
         'transparent',
         'transparent',
-        'transparent'
+        'transparent',
+        '#4caf50'
       ])
   },
   mounted: function () {
     this.setHeaders()
-    this.getStoreAndMedicine()
   }
 }
 </script>

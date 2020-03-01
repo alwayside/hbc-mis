@@ -95,7 +95,7 @@
       @click.native="btnOn(5)"
       class="appBarBtn"
       :height=appBarHeight
-      to="/DownloadCenter"
+      to="/finance"
           >
             {{$t('finance')}}
           </v-btn>

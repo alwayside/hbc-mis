@@ -41,7 +41,7 @@
         <v-row>
           <v-col sm="1"></v-col>
           <v-col>
-            <v-btn to="/store"  block color='success' dark >
+            <v-btn @click="$router.back(-1)"  block color='success' dark >
               {{$t('return')}}
             </v-btn>
           </v-col>

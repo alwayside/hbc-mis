@@ -30,6 +30,25 @@
         AND MSL.purchase_store = MS.id
     </select>
 
+    <select id="selectByFilter" resultType="com.hbcmis.entity.dto.SellDto">
+        SELECT MP.*,MMT.MEDICINE_NAME,MS.STORE_NAME
+        FROM (MIS_SELL MP,MIS_MEDICINE_TYPES MMT,MIS_STORE MS)
+        WHERE MS.id = MP.sell_store
+        AND MMT.id = MP.sell_type
+        <if test="begin != null">
+            AND MP.sell_date between #{begin} and #{end}
+        </if>
+        <if test="sellType != null and sellType != ''">
+            AND MP.sell_type = #{sellType}
+        </if>
+        <if test="sellStore != null and sellStore != ''">
+            AND MP.sell_store = #{sellStore}
+        </if>
+        <if test="bill != null and bill != ''">
+            AND MP.sell_bill = #{bill}
+        </if>
+    </select>
+
     <select id="selectById" resultType="com.hbcmis.entity.repository.SellDo">
         SELECT * FROM MIS_SELL MS WHERE MS.id = #{id}
     </select>

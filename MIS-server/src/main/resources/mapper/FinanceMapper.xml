@@ -19,6 +19,20 @@
         SELECT * FROM MIS_FINANCE WHERE FINANCE_BILL = #{financeBill}
     </select>
 
+    <select id="selectByFilter" resultType="com.hbcmis.entity.repository.FinanceDo">
+        SELECT * FROM MIS_FINANCE
+        WHERE finance_sum > 0
+        <if test="begin != null">
+            AND finance_date between #{begin} and #{end}
+        </if>
+        <if test="financeType != null and financeType != ''">
+            AND finance_type = #{financeType}
+        </if>
+        <if test="bill != null and bill != ''">
+            AND finance_bill = #{bill}
+        </if>
+    </select>
+
     <select id="selectByDate" resultType="com.hbcmis.entity.repository.FinanceDo">
         SELECT * FROM MIS_FINANCE MF
         WHERE MF.sell_date &lt; #{endDate}

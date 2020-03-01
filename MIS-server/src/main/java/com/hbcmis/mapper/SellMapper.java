@@ -5,6 +5,7 @@ import com.hbcmis.entity.repository.SellDo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface SellMapper {
 
     void addRecord(@Param("sellBill")Long sellBill, @Param("sellType")int sellType, @Param("sellStore")int sellStore, @Param("sellNumber")int sellNumber);
 
+    List<SellDto> selectByFilter(@Param("sellType") Integer sellType, @Param("sellStore") Integer sellStore, @Param("bill") Long bill, @Param("begin") Timestamp begin, @Param("end") Timestamp end);
 }

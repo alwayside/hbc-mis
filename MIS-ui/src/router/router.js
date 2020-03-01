@@ -3,7 +3,12 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/view/HelloWorld'
 import purchase from '../components/view/purchase'
 import purchaseView from '../components/view/purchase/purchaseView'
-import purchasMedicine from '../components/view/purchase/purchaseMedicine'
+import purchaseMedicine from '../components/view/purchase/purchaseMedicine'
+import sell from '../components/view/sell'
+import sellView from '../components/view/sell/sellView'
+import sellMedicine from '../components/view/sell/sellMedicine'
+import finance from '../components/view/finance'
+import financeView from '../components/view/finance/financeView'
 import Medicine from '../components/view/medicine'
 import medicineView from '../components/view/medicine/medicineView'
 import medicineAdd from '../components/view/medicine/medicineAdd'
@@ -42,8 +47,48 @@ const router = new Router({
     },
     {
       path: '/purchase/medicine',
-      name: 'purchasMedicine',
-      component: purchasMedicine
+      name: 'purchaseMedicine',
+      component: purchaseMedicine
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/sell',
+      name: 'sell',
+      component: sell
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/sell/records',
+      name: 'sellView',
+      component: sellView
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/sell/medicine',
+      name: 'sellMedicine',
+      component: sellMedicine
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/finance',
+      name: 'finance',
+      component: finance
+      // meta: {
+      //   requiresAuth: true
+      // }
+    },
+    {
+      path: '/finance/records',
+      name: 'financeView',
+      component: financeView
       // meta: {
       //   requiresAuth: true
       // }

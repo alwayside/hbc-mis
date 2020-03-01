@@ -5,10 +5,10 @@
       :src="bgSrc"
     >
       <div class="carouselSpan mb-2">
-        <span class="display-1" style="width: 50%">{{ $t('purchaseSystem')}}</span>
+        <span class="display-1" style="width: 50%">{{ $t('financeSystem')}}</span>
       </div>
       <div class="carouselSpan1 ma-2">
-        <span class="subtitle-1" style="width: 66%">{{$t('purchaseSystemMsg')}}</span>
+        <span class="subtitle-1" style="width: 66%">{{$t('financeSystemMsg')}}</span>
       </div>
     </v-parallax>
     <v-card elevation="0">
@@ -19,18 +19,18 @@
           <v-col sm="2"></v-col>
           <v-col>
             <v-col>
-              <v-btn to="/purchase/records"  class="innerBtn mb-2 mt-4">
-                {{$t('purchaseRecord')}}
+              <v-btn to="/finance/records"  class="innerBtn mb-2 mt-4">
+                {{$t('financeRecord')}}
               </v-btn>
             </v-col >
           </v-col >
-          <v-col class="d-flex align-center justify-center">
+          <!-- <v-col class="d-flex align-center justify-center">
             <div>
-              <v-btn to="/purchase/medicine"  class="innerBtn mb-2 mt-4">
-                {{$t('medicinePurchase')}}
+              <v-btn to="/finance/medicine"  class="innerBtn mb-2 mt-4">
+                {{$t('medicinefinance')}}
               </v-btn>
             </div>
-          </v-col>
+          </v-col> -->
           <v-col sm="2"></v-col>
         </v-row>
       </v-card-text>
@@ -55,11 +55,11 @@ export default {
       'btnColor',
       [
         'transparent',
-        '#4caf50',
         'transparent',
         'transparent',
         'transparent',
-        'transparent'
+        'transparent',
+        '#4caf50'
       ])
   },
   mounted: function () {

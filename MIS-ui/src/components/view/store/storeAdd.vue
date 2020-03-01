@@ -75,7 +75,7 @@
             <v-btn color='success' block dark @click=getDate() class="mb-1">{{$t('add')}}</v-btn>
           </v-col>
           <v-col sm="1">
-            <v-btn to="/store"  block color='success' dark >
+            <v-btn @click="$router.back(-1)"  block color='success' dark >
               {{$t('return')}}
             </v-btn>
           </v-col >
