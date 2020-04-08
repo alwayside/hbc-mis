@@ -13,4 +13,12 @@
         SELECT * FROM MIS_ADMIN MA WHERE MA.id = #{id}
     </select>
 
+    <select id="selectAccount" resultType="com.hbcmis.entity.repository.AdminDo" >
+        SELECT * FROM MIS_ADMIN MA WHERE MA.account = #{account}
+    </select>
+
+    <insert id="adminRegister" >
+        INSERT INTO MIS_ADMIN VALUES (default ,#{account},#{password},#{username})
+  	</insert>
+
 </mapper>

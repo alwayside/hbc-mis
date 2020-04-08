@@ -7,12 +7,12 @@ export default {
   name: 'Login',
   methods: {
     loginFun () {
-      this.$axios.post('请求的后端接口链接', {
-        data: {
-          userId: 'admin', // 登录名
-          userPwd: 'admin' // 登录密码
-        }
-      }).then((res) => {
+      let adminDo = {
+        account: 'admin', // 登录名
+        password: 'admin' // 登录密码
+      }
+      let url = '/admin/login'
+      this.$axios.post(url, adminDo).then((res) => {
         if (res.data.status === 200) {
           var userInfo = res.data.data
           this.$store.commit('$_setToken', userInfo.token)

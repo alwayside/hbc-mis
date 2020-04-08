@@ -18,6 +18,7 @@ import storeView from '../components/view/store/storeView'
 import storeAdd from '../components/view/store/storeAdd'
 import storeManage from '../components/view/store/storeManage'
 import storeRemain from '../components/view/store/storeRemain'
+import Login from '../components/view/login/Login'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ const router = new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/purchase',
@@ -165,6 +171,7 @@ const router = new Router({
       //   requiresAuth: true
       // }
     }
+
   ]
 })
 
